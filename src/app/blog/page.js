@@ -1,11 +1,14 @@
+import getDomain from "@/app/lib/getDomain";
+
 async function getData() {
-  /*   const endpoint = "http://localhost:3000/api/posts";
+  const domain = getDomain();
+  const endpoint = `${domain}/api/posts`;
   const res = await fetch(endpoint);
 
-  if (!res.ok) throw new Error("Failed to fetch data");
-
-  return res.json(); */
-  return { items: [] };
+  if (!res.ok) {
+    throw new Error("Failed to fetch posts");
+  }
+  return res.json();
 }
 
 export default async function BlogPage() {
