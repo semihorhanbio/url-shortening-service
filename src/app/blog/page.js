@@ -8,6 +8,11 @@ async function getData() {
   if (!res.ok) {
     throw new Error("Failed to fetch posts");
   }
+
+  if (res.headers.get("content-type") !== "application/json") {
+    return { items: [] };
+  }
+
   return res.json();
 }
 
