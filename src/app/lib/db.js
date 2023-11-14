@@ -28,3 +28,23 @@ export async function addLink(url) {
   const newLink = { url: url };
   return await db.insert(LinksTable).values(newLink).returning();
 }
+
+export async function getLinks(limit, offset) {
+  limit = limit ? limit : 10;
+  offset = offset ? offset : 0;
+  return await db.select().from(LinksTable).limit(limit).offset(offset);
+}
+
+export async function getMinLinks(limit, offset) {
+  limit = limit ? limit : 10;
+  offset = offset ? offset : 0;
+  return await db
+    .select({
+      id: LinksTable.id,
+      url: LinksTable.url,
+      timestamp: LinksTable.created_at,
+    })
+    .from(LinksTable)
+    .limit(limit)
+    .offset(offset);
+}

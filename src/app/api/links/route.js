@@ -1,6 +1,12 @@
 import { NextResponse } from "next/server";
 import isValidURL from "@/app/lib/isValidUrl";
+import { getMinLinks } from "@/app/lib/db";
 import { addLink } from "@/app/lib/db";
+
+export async function GET(request) {
+  const links = await getMinLinks();
+  return NextResponse.json(links, { status: 200 }); // 200 OK status code for successful request.
+}
 
 export async function POST(request) {
   const contentType = await request.headers.get("content-type");
